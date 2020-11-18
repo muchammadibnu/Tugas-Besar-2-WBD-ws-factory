@@ -4,4 +4,8 @@
      name="HelloWebService"
      implementation="net.codejava.Hello"
      url-pattern="/ws/hello"/>
+   <endpoint
+     name="ChocolateWebService"
+     implementation="net.codejava.Chocolate"
+     url-pattern="/ws/chocolate"/>
 </endpoints>
