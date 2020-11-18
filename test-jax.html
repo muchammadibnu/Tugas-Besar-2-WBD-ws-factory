@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+
+    var SoaMessage = `<?xml version='1.0' encoding='UTF-8'?>
+                        <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+                            <S:Body>
+                                <ns2:bonjour xmlns:ns2="http://codejava.net/">
+                                    <arg0>hai</arg0>
+                                </ns2:bonjour>
+                            </S:Body>
+                        </S:Envelope>`;
+    console.log(SoaMessage);
+    var url = "http://localhost:8086/WSFactory/ws/hello?wsdl";
+
+    var request = new XMLHttpRequest();
+
+    request.open('POST', url, true);
+    request.onreadystatechange = function() {
+        if (request.readyState==4){
+            $("#div1").html(request.responseText);
+        }
+    };
+    request.setRequestHeader("Content-type", "text/xml  ");
+
+    request.send(SoaMessage);
+
+
+    // $.support.cors = true;
+
+    // $.ajax({
+    //     type: "POST",
+    //     url: url,
+    //     jsonpCallback: "MyCallbackDED",
+    //     dataType: "xml",
+    //     processData: false,
+    //     contentType: "text/xml; charset=\"utf-8\"",
+    //     success: function (msg) {
+    //         $("#div1").html(msg);
+
+    //     },
+    //     error: function (msg) {
+    //         alert("Failed: " + msg.status + ": " + msg.statusText);
+    //     }
+
+    // });
+  });
+});
+</script>
+</head>
+<body>
+
+<button>Get External Content</button>
+<div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
+
+</body>
+</html>
