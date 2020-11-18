@@ -16,6 +16,8 @@ import javax.jws.soap.SOAPBinding.Style;
 public class Chocolate {
 	@WebMethod
 	public String addNewChocolateRecipe(String chocolateName, String strListBahan, String strListJumlah) {
+		// input nya: "nama coklat" , "bahan 1, bahan 2, .." , "jumlah bahan 1, jumlah bahan 2, ..."
+		
 		List<String> listBahan = Arrays.asList(strListBahan.split(","));
 		List<String> listJumlah = Arrays.asList(strListJumlah.split(","));
 		
@@ -28,6 +30,23 @@ public class Chocolate {
 				String query = "INSERT INTO resep (chocolate_name, bahan, jumlah) VALUES ('" + chocolateName + "', '" + listBahan.get(i) + "', " + listJumlah.get(i) + ")";
 				dbConnector.executeUpdate(conn, query);
 			}
+			return "success";
+			
+		} catch (SQLException e) {
+			return e.getMessage();
+		}
+	}
+	
+	@WebMethod
+	public String addBahanAndHarga(String name, int harga) {
+		DbConnector dbConnector = new DbConnector();
+		Connection conn = null;
+		try {
+			conn = dbConnector.getConnection();
+			
+			String query = "INSERT INTO harga_bahan (name, harga) VALUES ('" + name + "', " + harga + ")";
+			dbConnector.executeUpdate(conn, query);
+			
 			return "success";
 			
 		} catch (SQLException e) {
