@@ -15,7 +15,7 @@ import javax.jws.soap.SOAPBinding.Style;
 @SOAPBinding(style = Style.RPC)
 public class Chocolate {
 	@WebMethod
-	public String addNewChocolate(String chocolateName, String strListBahan, String strListJumlah) {
+	public String addNewChocolateRecipe(String chocolateName, String strListBahan, String strListJumlah) {
 		List<String> listBahan = Arrays.asList(strListBahan.split(","));
 		List<String> listJumlah = Arrays.asList(strListJumlah.split(","));
 		
@@ -33,6 +33,5 @@ public class Chocolate {
 		} catch (SQLException e) {
 			return e.getMessage();
 		}
-		
 	}
 }
