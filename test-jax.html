@@ -9,19 +9,26 @@ $(document).ready(function(){
     var SoaMessage = `<?xml version='1.0' encoding='UTF-8'?>
                         <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
                             <S:Body>
-                                <ns2:accessJdbc xmlns:ns2="http://codejava.net/">
-                                </ns2:accessJdbc>
+                                <ns2:getListRecipe xmlns:ns2="http://codejava.net/">
+                                   
+                                </ns2:getListRecipe>
                             </S:Body>
                         </S:Envelope>`;
     console.log(SoaMessage);
-    var url = "http://localhost:8086/WSFactory/ws/hello?wsdl";
+    var url = "http://localhost:8086/WSFactory/ws/chocolate?wsdl";
 
     var request = new XMLHttpRequest();
 
     request.open('POST', url, true);
     request.onreadystatechange = function() {
         if (request.readyState==4){
-            $("#div1").html(request.responseText);
+            var res = request.responseXML;
+            console.log(res);
+             res = res.getElementsByTagName("S:Envelope")[0];
+             res = res.getElementsByTagName("S:Body")[0].childNodes[0];
+             res = res.getElementsByTagName("return")[0].childNodes[0].data;
+             console.log(res);
+            $("#div1").html(res);
         }
     };
     request.setRequestHeader("Content-type", "text/xml  ");
