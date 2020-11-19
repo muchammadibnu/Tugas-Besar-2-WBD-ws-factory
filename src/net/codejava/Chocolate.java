@@ -80,4 +80,86 @@ public class Chocolate {
 		}
 	}
 	
+	@WebMethod
+	public String makeChocolate(String chocolate_name, int amount) {
+		DbConnector dbConnector = new DbConnector();
+		Connection conn = null;
+		try {
+			
+			conn = dbConnector.getConnection();
+	    	Statement stmt = conn.createStatement();
+	    	
+	    	ArrayList<String> listNamaBahan = new ArrayList<String>();
+	    	ArrayList<Integer> listJumlahBahan = new ArrayList<Integer>();
+	    	
+	    	// get list bahan dan jumlah
+	    	ResultSet rs = stmt.executeQuery("SELECT bahan, jumlah FROM resep WHERE chocolate_name = '" +  chocolate_name + "'");
+	    	
+	    	if (!rs.isBeforeFirst() ) {    
+	    	    return "not found in list recipe, you must add the recipe first";
+	    	} 
+
+	    	while ( rs.next() ) {
+	    		String namaBahan = rs.getString("bahan");
+	    		int jumlahBahan = rs.getInt("jumlah");
+	    		
+	    		listNamaBahan.add(namaBahan);
+	    		listJumlahBahan.add(jumlahBahan);
+	    	}
+	    	stmt.close();
+	    	
+	    	// cek apakah bahannya mencukupi
+	    	for (int i = 0; i<listNamaBahan.size(); ++i) {
+	    		String namaBahan = listNamaBahan.get(0);
+	    		int jumlahBahan = listJumlahBahan.get(0);
+	    
+	    		Bahan objBahan = new Bahan();
+	    		int jumlahDiGudang = objBahan.getJumlahBahan(namaBahan);
+	    		
+	    		if (jumlahDiGudang==-1) {
+	    			return "error when finding jumlah bahan";
+	    		}
+	    		
+	    		if (jumlahDiGudang < jumlahBahan*amount) {
+	    			return "error: "  + namaBahan + " kurang"; 
+	    		}
+	    	}
+	    	
+	    	// kalau mencukupi, kurangi bahan2 nya
+	    	for (int i = 0; i<listNamaBahan.size(); ++i) {
+	    		String namaBahan = listNamaBahan.get(i);
+	    		int jumlahBahan = listJumlahBahan.get(i);
+	    		    		
+	    		Bahan objBahan = new Bahan();
+	    		objBahan.decreaseBahan(namaBahan, jumlahBahan*amount);
+	    	}
+	    	
+	    	// tambahi coklat ke tabel chocolate_stock
+	    	// cek dulu sebelumnya udah ada coklat itu ga
+	    	stmt = conn.createStatement();
+	    	rs = stmt.executeQuery("SELECT amount FROM chocolate_stock WHERE name = '" +  chocolate_name + "'");
+	    	if (rs.next()) {	// found, so do the update
+	    		int jumlahNow = rs.getInt("amount") + amount;
+	    		stmt.close();
+	    		
+	    		// update
+	    		String query = "UPDATE chocolate_stock SET amount = " + jumlahNow +  " WHERE name = '" + chocolate_name + "'";
+				dbConnector.executeUpdate(conn, query);
+				
+				return " stock updated => " + chocolate_name + " = " + jumlahNow;
+	    	}
+	    	else { // not found, then insert
+	    		stmt.close();
+	    		
+	    		String query = "INSERT INTO chocolate_stock (name, amount) VALUES ('" + chocolate_name + "', " + amount + ")";
+				dbConnector.executeUpdate(conn, query);
+				
+				return " chocolate created => " + chocolate_name + " = " + amount;
+	    	}
+			
+		} catch (SQLException e) {
+			return e.getMessage();
+		}
+
+	}
 }

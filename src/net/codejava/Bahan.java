@@ -17,7 +17,28 @@ import javax.jws.soap.SOAPBinding.Style;
 @WebService
 @SOAPBinding(style = Style.RPC)
 public class Bahan {
-
+	@WebMethod 
+	public int getJumlahBahan(String nama_bahan) {
+		DbConnector dbConnector = new DbConnector();
+		Connection conn = null;
+		try {
+			conn = dbConnector.getConnection();
+	    	Statement stmt = conn.createStatement();
+	 
+	    	ResultSet rs = stmt.executeQuery("SELECT jumlah FROM list_bahan WHERE bahan = '" + nama_bahan + "'");
+	    	
+	    	int jumlah = 0;
+	    	while (rs.next() ) {
+	    		jumlah = rs.getInt("jumlah");
+	    	} 
+	    	stmt.close();
+	    	return jumlah;
+	    	
+		} catch (SQLException e) {
+			return -1;
+		}
+	}
+	
     @WebMethod
     public String addBahan(String nama_bahan, int jumlah) {
     	DbConnector dbConnector = new DbConnector();
@@ -60,7 +81,30 @@ public class Bahan {
 		} catch (SQLException e) {
 			return e.getMessage();
 		}
-    	
-
     }
+    
+    public String decreaseBahan(String nama_bahan, int jumlah) {
+    	DbConnector dbConnector = new DbConnector();
+		Connection conn = null;
+		
+		try {
+			conn = dbConnector.getConnection();
+			Statement stmt = conn.createStatement();
+			 
+	    	ResultSet rs = stmt.executeQuery("SELECT jumlah FROM list_bahan WHERE bahan = '" + nama_bahan + "'");
+	    	if (rs.next()) {
+	    		int jumlahNow = rs.getInt("jumlah");
+	    		jumlahNow -= jumlah;
+	    		stmt.close();
+	    		String query = "UPDATE list_bahan SET jumlah = " + jumlahNow +  " WHERE bahan = '" + nama_bahan + "'";
+				dbConnector.executeUpdate(conn, query);
+				
+				return "jumlah bahan menjadi " + Integer.toString(jumlahNow);
+	    	}
+	    	return "error";
+		} catch (SQLException e) {
+			return e.getMessage();
+		}
+    }
+    
 }
