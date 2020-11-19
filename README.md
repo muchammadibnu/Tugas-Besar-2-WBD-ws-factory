@@ -1,8 +1,18 @@
+# Description
+Web Service Factory using java servlet, jax-ws, tomcat. Using soap protocol
+
 ## How to setup
+### setup webservice
+intinya ngikutin `https://www.codejava.net/java-ee/web-services/how-to-code-and-deploy-java-xml-web-services-jax-ws-on-tomcat` yang pas awal awalnya
 1. download eclipse
 2. open this project
 3. install tomcat and setup it on eclipse
 4. run the server (make sure the port correct)
+
+### setup db
+1. nyalakan apache + sql dari xampp (pastikan port sqlnya di 3306)
+2. import sql nya (nama db nya sesuaikan nama file .sql nya) (importnya di phpmyadmin)
+
 
 ## How to request from frontend
 - create post request using ajax and send xml in the body. Example request is on file `test-jax.html`
