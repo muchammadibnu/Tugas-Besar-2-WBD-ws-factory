@@ -16,4 +16,8 @@
      name="BahanWebService"
      implementation="net.codejava.Bahan"
      url-pattern="/ws/bahan"/>
+   <endpoint
+     name="RequestChocolateWebService"
+     implementation="net.codejava.RequestChocolate"
+     url-pattern="/ws/requestchocolate"/>
 </endpoints>

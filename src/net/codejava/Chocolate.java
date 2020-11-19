@@ -146,7 +146,7 @@ public class Chocolate {
 	    		String query = "UPDATE chocolate_stock SET amount = " + jumlahNow +  " WHERE name = '" + chocolate_name + "'";
 				dbConnector.executeUpdate(conn, query);
 				
-				return " stock updated => " + chocolate_name + " = " + jumlahNow;
+				return "stock updated => " + chocolate_name + " = " + jumlahNow;
 	    	}
 	    	else { // not found, then insert
 	    		stmt.close();
@@ -154,7 +154,7 @@ public class Chocolate {
 	    		String query = "INSERT INTO chocolate_stock (name, amount) VALUES ('" + chocolate_name + "', " + amount + ")";
 				dbConnector.executeUpdate(conn, query);
 				
-				return " chocolate created => " + chocolate_name + " = " + amount;
+				return "chocolate created => " + chocolate_name + " = " + amount;
 	    	}
 			
 		} catch (SQLException e) {
