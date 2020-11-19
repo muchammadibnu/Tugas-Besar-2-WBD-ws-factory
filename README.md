@@ -27,6 +27,12 @@ arg3 = harga <br>
 - url : `http://localhost:8086/WSFactory/ws/chocolate?wsdl`
 - return : string html yang bisa langsung di output, berisikan nama-nama coklat serta list bahan dan jumlahnya
 
+### melihat list coklat dan stok yang tersedia di factory ###
+- method : String getListChocolateInFactory()
+- input : no input
+- url : `http://localhost:8086/WSFactory/ws/chocolate?wsdl`
+- return : string html yang bisa langsung di output, berisikan nama-nama coklat serta stok di factory nya
+
 ### Membuat coklat dan menambahkannya ke stok coklat di Factory ###
 - method : `String makeChocolate(String chocolate_name, int amount)`
 - tujuan: membuat coklat dari bahan-bahan yang ada, kemudian menambahkan nya ke stok coklat di FACTORY
