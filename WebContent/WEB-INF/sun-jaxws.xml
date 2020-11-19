@@ -12,4 +12,8 @@
      name="SaldoWebService"
      implementation="net.codejava.Saldo"
      url-pattern="/ws/saldo"/>
+   <endpoint
+     name="BahanWebService"
+     implementation="net.codejava.Bahan"
+     url-pattern="/ws/bahan"/>
 </endpoints>
