@@ -162,4 +162,25 @@ public class Chocolate {
 		}
 
 	}
+	
+	@WebMethod
+	public String getListChocolateInFactory() {
+		DbConnector dbConnector = new DbConnector();
+		Connection conn = null;
+		try {
+			conn = dbConnector.getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT name, amount FROM chocolate_stock");
+			String resHtml = "<ul>";
+			while(rs.next()) {
+				resHtml += "<li>" + rs.getString("name") + " : " + rs.getInt("amount") + "</li>";
+			}
+			resHtml += "</ul>";
+			
+			return resHtml;
+			
+		} catch (SQLException e) {
+			return e.getMessage();
+		}
+	}
 }
