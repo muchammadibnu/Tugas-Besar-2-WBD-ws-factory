@@ -11,12 +11,79 @@
 ## List of methods and endpoints
 ### Menambahkan resep ###
 - method : `String addNewChocolateRecipe(String chocolateName, String strListBahan, String strListJumlah, int hargaCoklat)`
+- tujuan: untuk menambahkan resep yang berisikan nama coklat baru, list bahan, list jumlah masing-masing bahan, dan harga coklatnya
 - input format : 
 arg0 = nama coklat <br>
 arg1 = bahan1,bahan2, ..  <br>
 arg2 = jumlah bahan 1,jumlah bahan 2,... <br>
 arg3 = harga <br>
 - url : `http://localhost:8086/WSFactory/ws/chocolate?wsdl`
+- return : string yang menandakan status
+
+### Melihat list resep ###
+- method : `String getListRecipe()`
+- tujuan: melihat semua resep coklat yang ada
+- input format: no input
+- url : `http://localhost:8086/WSFactory/ws/chocolate?wsdl`
+- return : string html yang bisa langsung di output, berisikan nama-nama coklat serta list bahan dan jumlahnya
+
+### Membuat coklat dan menambahkannya ke stok coklat di Factory ###
+- method : `String makeChocolate(String chocolate_name, int amount)`
+- tujuan: membuat coklat dari bahan-bahan yang ada, kemudian menambahkan nya ke stok coklat di FACTORY
+- input format: 
+arg0 = nama coklat <br>
+arg1 = amount <br>
+- url : `http://localhost:8086/WSFactory/ws/chocolate?wsdl`
+- return : string yang menandakan status
+
+### Melihat saldo ###
+- method : `String getSaldo()`
+- input format: no input
+- url : `http://localhost:8086/WSFactory/ws/saldo?wsdl`
+- return : String saldo nya 
+
+### Add saldo ###
+- method : `String addSaldo(int penambahan)`
+- input: penambahan saldonya
+- url : `http://localhost:8086/WSFactory/ws/saldo?wsdl`
+- return : String menandakan status
+
+### Kurangi saldo ###
+- method : `String decreaseSaldo(int pengurangan)`
+- input: pengurangan saldonya
+- url : `http://localhost:8086/WSFactory/ws/saldo?wsdl`
+- return : String menandakan status
+
+### melihat jumlah bahan yang tersedia di stok factory ###
+- methdo : `int getJumlahBahan(String nama_bahan)`
+- input : nama bahannya
+- url : `http://localhost:8086/WSFactory/ws/bahan?wsdl`
+- return : int jumlah bahannya (-1 kalau error)
+
+### menambahkan bahan ke stok factory (misal setelah beli dari supplier) ###
+- method : `String addBahan(String nama_bahan, int jumlah)`
+- input : nama bahan dan jumlah yang mau ditambahkan
+- url : `http://localhost:8086/WSFactory/ws/bahan?wsdl`
+- return : String menandakan status
+
+### request penambahan coklat dari wwwweb ###
+- method : reqAddChocolate(String name, int amount)
+- input : nama coklatnya, jumlahnya
+- url : `http://localhost:8086/WSFactory/ws/requestchocolate?wsdl`
+- return : int id request (perlu disimpan ini, buat ntar ngecek status requestnya)
+
+### cek status request penambahan coklat dari wwweb ###
+- method : `String checkStatus(int id)`
+- input : id request yang tadi
+- url : `http://localhost:8086/WSFactory/ws/requestchocolate?wsdl`
+- return : string status ("PENDING" or "DELIVERED")
+
+### approve request dari app react nya ###
+- method : `String approveReq(int id)`
+- input : id request 
+- url : `http://localhost:8086/WSFactory/ws/requestchocolate?wsdl`
+- return : string menandakan status
+
 
 
 ## References
