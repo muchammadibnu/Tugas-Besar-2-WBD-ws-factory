@@ -29,6 +29,9 @@ $(document).ready(function(){
              res = res.getElementsByTagName("return")[0].childNodes[0].data;
              console.log(res);
             $("#div1").html(res);
+
+            // kalau ga perlu parsing pake yang ini aja, misal returnnya cuma string
+            // $("#div1").html(request.responseText);
         }
     };
     request.setRequestHeader("Content-type", "text/xml  ");
@@ -36,24 +39,6 @@ $(document).ready(function(){
     request.send(SoaMessage);
 
 
-    // $.support.cors = true;
-
-    // $.ajax({
-    //     type: "POST",
-    //     url: url,
-    //     jsonpCallback: "MyCallbackDED",
-    //     dataType: "xml",
-    //     processData: false,
-    //     contentType: "text/xml; charset=\"utf-8\"",
-    //     success: function (msg) {
-    //         $("#div1").html(msg);
-
-    //     },
-    //     error: function (msg) {
-    //         alert("Failed: " + msg.status + ": " + msg.statusText);
-    //     }
-
-    // });
   });
 });
 </script>
