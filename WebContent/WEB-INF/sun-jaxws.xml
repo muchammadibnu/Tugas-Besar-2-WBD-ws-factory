@@ -8,4 +8,8 @@
      name="ChocolateWebService"
      implementation="net.codejava.Chocolate"
      url-pattern="/ws/chocolate"/>
+   <endpoint
+     name="SaldoWebService"
+     implementation="net.codejava.Saldo"
+     url-pattern="/ws/saldo"/>
 </endpoints>

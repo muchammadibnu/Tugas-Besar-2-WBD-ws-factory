@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import javax.jws.soap.SOAPBinding.Style;
 public class Chocolate {
 	@WebMethod
 	public String addNewChocolateRecipe(String chocolateName, String strListBahan, String strListJumlah, int hargaCoklat) {
+		// untuk menambahkan resep baru
 		// input nya: "nama coklat" , "bahan 1, bahan 2, .." , "jumlah bahan 1, jumlah bahan 2, ..." , harga
 		
 		List<String> listBahan = Arrays.asList(strListBahan.split(","));
@@ -44,6 +46,8 @@ public class Chocolate {
 	
 	@WebMethod
 	public String getListRecipe() {
+		// untuk mendapat semua list recipe coklat
+		
 		DbConnector dbConnector = new DbConnector();
 		Connection conn = null;
 		try {
@@ -75,4 +79,5 @@ public class Chocolate {
 			return e.getMessage();
 		}
 	}
+	
 }
