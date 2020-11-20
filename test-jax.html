@@ -14,6 +14,17 @@ $(document).ready(function(){
                                 </ns2:getListRecipe>
                             </S:Body>
                         </S:Envelope>`;
+
+    // misal perlu parameter input ditambahi <arg0></arg0> , <arg1></agr1>, dst
+    // var SoaMessage = `<?xml version='1.0' encoding='UTF-8'?>
+    //                     <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    //                         <S:Body>
+    //                             <ns2:getListRecipe xmlns:ns2="http://codejava.net/">
+    //                                <arg0>input 1<arg/0>
+    //                                <arg1>input 2<arg/1>
+    //                             </ns2:getListRecipe>
+    //                         </S:Body>
+    //                     </S:Envelope>`;
     console.log(SoaMessage);
     var url = "http://localhost:8086/WSFactory/ws/chocolate?wsdl";
 
