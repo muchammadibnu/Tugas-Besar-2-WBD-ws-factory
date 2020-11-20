@@ -8,7 +8,7 @@ intinya ngikutin `https://www.codejava.net/java-ee/web-services/how-to-code-and-
 2. open eclipse
 3. file >> import >> general >> existing projects >> trus pilih folder dari project ini
 4. install tomcat and setup it on eclipse
-5. run the server (make sure the port correct)
+5. run the server (make sure the port correct) <br>
 buat nge tes udah jalan atau ga coba pake salah satu url yang aku cantumin di bagian bawah ini
 
 ### setup db
