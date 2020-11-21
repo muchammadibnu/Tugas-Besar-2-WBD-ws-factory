@@ -103,6 +103,11 @@ arg1 = amount <br>
 - url : `http://localhost:8086/WSFactory/ws/requestchocolate?wsdl`
 - return : string menandakan status
 
+### Melihat daftar pemesanan coklat ###
+- method : `String getListReqChocolate()`
+- input : -
+- url : `http://localhost:8086/WSFactory/ws/requestchocolate?wsdl`
+- return : html tabel berisi konten dari database
 
 
 ## References
