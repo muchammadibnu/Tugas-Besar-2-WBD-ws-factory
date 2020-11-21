@@ -106,5 +106,37 @@ public class RequestChocolate {
 		}
 	}
 	
+	@WebMethod
+	public String getListReqChocolate() {
+		DbConnector dbConnector = new DbConnector();
+		Connection conn = null;
+		try {
+			conn = dbConnector.getConnection();
+			Statement stmt = conn.createStatement();
+			
+			String resHtml = "<table>";
+			resHtml += "<tr> <th>id</th> <th>chocolate_name</th> <th>amount</th> <th>status</th> </tr>";
+			ResultSet rs = stmt.executeQuery("SELECT id, chocolate_name, amount, status FROM request_add_stock");
+	    	if (rs.next()) {
+	    		int id = rs.getInt("id");
+	    		String chocolate_name = rs.getString("chocolate_name");
+	    		int amount = rs.getInt("amount");
+	    		String status = rs.getString("status");
+	    		
+	    		resHtml += "<tr>";
+	    		resHtml += "<td>" + id + "</td>";
+	    		resHtml += "<td>" + chocolate_name + "</td>";
+	    		resHtml += "<td>" + amount + "</td>";
+	    		resHtml += "<td>" + status + "</td>";
+	    		resHtml += "</tr>";
+	    			
+	    	}
+	    	resHtml += "</table>";
+	    	return resHtml;
+		}
+    	catch (SQLException e) {
+			return e.getMessage();
+		}
+	}
 	
 }

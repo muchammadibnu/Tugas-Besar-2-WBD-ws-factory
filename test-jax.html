@@ -9,9 +9,9 @@ $(document).ready(function(){
     var SoaMessage = `<?xml version='1.0' encoding='UTF-8'?>
                         <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
                             <S:Body>
-                                <ns2:getListRecipe xmlns:ns2="http://codejava.net/">
+                                <ns2:getListReqChocolate xmlns:ns2="http://codejava.net/">
                                    
-                                </ns2:getListRecipe>
+                                </ns2:getListReqChocolate>
                             </S:Body>
                         </S:Envelope>`;
 
@@ -26,7 +26,7 @@ $(document).ready(function(){
     //                         </S:Body>
     //                     </S:Envelope>`;
     console.log(SoaMessage);
-    var url = "http://localhost:8086/WSFactory/ws/chocolate?wsdl";
+    var url = "http://localhost:8086/WSFactory/ws/requestchocolate?wsdl";
 
     var request = new XMLHttpRequest();
 
@@ -35,8 +35,6 @@ $(document).ready(function(){
         if (request.readyState==4){
             var res = request.responseXML;
             console.log(res);
-             res = res.getElementsByTagName("S:Envelope")[0];
-             res = res.getElementsByTagName("S:Body")[0].childNodes[0];
              res = res.getElementsByTagName("return")[0].childNodes[0].data;
              console.log(res);
             $("#div1").html(res);
