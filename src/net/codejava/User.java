@@ -76,8 +76,7 @@ public class User{
 			
 			String query = "INSERT INTO user(username, email, password, role) VALUES ('" + username + "','" + email + "','" + hashtext + "'," + "'user'" +")";
 			dbConnector.executeUpdate(conn, query);
-	   
-	    	stmt.close();
+	  
 			return "success";
 			
 		} catch (SQLException e) {
