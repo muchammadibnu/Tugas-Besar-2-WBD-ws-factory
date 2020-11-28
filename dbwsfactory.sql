@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2020 at 09:53 AM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.10
+-- Waktu pembuatan: 28 Nov 2020 pada 01.57
+-- Versi server: 10.4.14-MariaDB
+-- Versi PHP: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `chocolate_stock`
+-- Struktur dari tabel `chocolate_stock`
 --
 
 CREATE TABLE `chocolate_stock` (
@@ -33,7 +33,7 @@ CREATE TABLE `chocolate_stock` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `chocolate_stock`
+-- Dumping data untuk tabel `chocolate_stock`
 --
 
 INSERT INTO `chocolate_stock` (`name`, `amount`) VALUES
@@ -42,7 +42,7 @@ INSERT INTO `chocolate_stock` (`name`, `amount`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `harga_coklat`
+-- Struktur dari tabel `harga_coklat`
 --
 
 CREATE TABLE `harga_coklat` (
@@ -51,7 +51,7 @@ CREATE TABLE `harga_coklat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `harga_coklat`
+-- Dumping data untuk tabel `harga_coklat`
 --
 
 INSERT INTO `harga_coklat` (`name`, `harga`) VALUES
@@ -60,7 +60,7 @@ INSERT INTO `harga_coklat` (`name`, `harga`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `list_bahan`
+-- Struktur dari tabel `list_bahan`
 --
 
 CREATE TABLE `list_bahan` (
@@ -70,7 +70,7 @@ CREATE TABLE `list_bahan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `list_bahan`
+-- Dumping data untuk tabel `list_bahan`
 --
 
 INSERT INTO `list_bahan` (`tanggal_kadaluwarsa`, `bahan`, `jumlah`) VALUES
@@ -80,7 +80,7 @@ INSERT INTO `list_bahan` (`tanggal_kadaluwarsa`, `bahan`, `jumlah`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `perubahan_saldo`
+-- Struktur dari tabel `perubahan_saldo`
 --
 
 CREATE TABLE `perubahan_saldo` (
@@ -89,7 +89,7 @@ CREATE TABLE `perubahan_saldo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `perubahan_saldo`
+-- Dumping data untuk tabel `perubahan_saldo`
 --
 
 INSERT INTO `perubahan_saldo` (`id`, `saldo`) VALUES
@@ -102,7 +102,7 @@ INSERT INTO `perubahan_saldo` (`id`, `saldo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `request_add_stock`
+-- Struktur dari tabel `request_add_stock`
 --
 
 CREATE TABLE `request_add_stock` (
@@ -113,16 +113,18 @@ CREATE TABLE `request_add_stock` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `request_add_stock`
+-- Dumping data untuk tabel `request_add_stock`
 --
 
 INSERT INTO `request_add_stock` (`id`, `chocolate_name`, `amount`, `status`) VALUES
-(1, 'Coklat Baru', 2, 'DELIVERED');
+(1, 'Coklat Baru', 2, 'DELIVERED'),
+(8, 'Chocolate 2', 1, 'PENDING'),
+(9, 'Chocolate 2', 1, 'PENDING');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `resep`
+-- Struktur dari tabel `resep`
 --
 
 CREATE TABLE `resep` (
@@ -132,66 +134,93 @@ CREATE TABLE `resep` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `resep`
+-- Dumping data untuk tabel `resep`
 --
 
 INSERT INTO `resep` (`chocolate_name`, `bahan`, `jumlah`) VALUES
 ('Coklat Baru', 'bahan 1', 12),
 ('Coklat Baru', 'bahan 2', 14);
 
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `user`
+--
+
+CREATE TABLE `user` (
+  `username` varchar(50) NOT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `password` varchar(1000) NOT NULL,
+  `role` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `user`
+--
+
+INSERT INTO `user` (`username`, `email`, `password`, `role`) VALUES
+('\"ibnu\"', '\"ibnu@gmail.com\"', '36e07e16be6ff47be311b6b3c7030382', 'user');
+
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `chocolate_stock`
+-- Indeks untuk tabel `chocolate_stock`
 --
 ALTER TABLE `chocolate_stock`
   ADD PRIMARY KEY (`name`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- Indexes for table `harga_coklat`
+-- Indeks untuk tabel `harga_coklat`
 --
 ALTER TABLE `harga_coklat`
   ADD PRIMARY KEY (`name`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- Indexes for table `list_bahan`
+-- Indeks untuk tabel `list_bahan`
 --
 ALTER TABLE `list_bahan`
   ADD PRIMARY KEY (`bahan`),
   ADD UNIQUE KEY `bahan` (`bahan`);
 
 --
--- Indexes for table `perubahan_saldo`
+-- Indeks untuk tabel `perubahan_saldo`
 --
 ALTER TABLE `perubahan_saldo`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `request_add_stock`
+-- Indeks untuk tabel `request_add_stock`
 --
 ALTER TABLE `request_add_stock`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indeks untuk tabel `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`username`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `perubahan_saldo`
+-- AUTO_INCREMENT untuk tabel `perubahan_saldo`
 --
 ALTER TABLE `perubahan_saldo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `request_add_stock`
+-- AUTO_INCREMENT untuk tabel `request_add_stock`
 --
 ALTER TABLE `request_add_stock`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
