@@ -35,7 +35,7 @@ public class User{
 
 			conn = dbConnector.getConnection();
 			
-			String query = "SELECT role FROM user WHERE username = '" + username + "' AND password = '" + hashtext + "'";
+			String query = "SELECT role FROM user WHERE username = " + username + " AND password = " + hashtext;
 			
 			Statement stmt = conn.createStatement(); 
 	    	ResultSet rs = stmt.executeQuery(query);
@@ -77,7 +77,16 @@ public class User{
 			String query = "INSERT INTO user(username, email, password, role) VALUES ('" + username + "','" + email + "','" + hashtext + "'," + "'user'" +")";
 			dbConnector.executeUpdate(conn, query);
 	  
-			return "success";
+			Statement stmt = conn.createStatement(); 
+	    	ResultSet rs = stmt.executeQuery("SELECT role FROM user WHERE username = " + username + " AND password = " + hashtext);
+	    	String role = "None";
+	    	if (rs.next()) {
+	    		if (rs.getMetaData().getColumnCount() == 1){
+	    			role = rs.getString("role");
+	    		}
+	    	}
+	    	stmt.close();
+			return role;;
 			
 		} catch (SQLException e) {
 			return e.getMessage();
