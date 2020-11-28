@@ -20,4 +20,8 @@
      name="RequestChocolateWebService"
      implementation="net.codejava.RequestChocolate"
      url-pattern="/ws/requestchocolate"/>
+   <endpoint
+     name="UserWebService"
+     implementation="net.codejava.User"
+     url-pattern="/ws/user"/>
 </endpoints>
