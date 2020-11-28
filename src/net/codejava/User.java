@@ -74,7 +74,7 @@ public class User{
 
 			conn = dbConnector.getConnection();
 			
-			String query = "INSERT INTO user (username, password, email, role) VALUES ('" + username + "','" + hashtext + "','" + email + "'," + "'user'" +")";
+			String query = "INSERT INTO user(username, email, password, role) VALUES ('" + username + "','" + email + "','" + password + "'," + "'user'" +")";
 			dbConnector.executeUpdate(conn, query);
 
 			Statement stmt = conn.createStatement(); 
