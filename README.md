@@ -1,5 +1,5 @@
 # Description
-Web Service Factory using java servlet, jax-ws, tomcat. Using soap protocol
+Web Service Factory adalah API yang terhubung oleh database factory yang digunakan untuk media komunikasi antara WWWeb dengan database Factory dan Willy Wangky's Factory dengan database factory. Web Service Factory menggunakan java servlet, jax-ws, tomcat. HTTP request yang dilakukan menggunakan soap protocol dan mysql sebagai database.
 
 ## How to setup
 ### setup webservice
@@ -109,6 +109,17 @@ arg1 = amount <br>
 - url : `http://localhost:8086/WSFactory/ws/requestchocolate?wsdl`
 - return : html tabel berisi konten dari database
 
+### Melakukan registrasi user ###
+- method : `String register()`
+- input : -
+- url : `http://localhost:8086/WSFactory/ws/user?wsdl`
+- return : string role dari user (default: 'user')
+
+### Melakukan login user ###
+- method : `String login()`
+- input : -
+- url : `http://localhost:8086/WSFactory/ws/user?wsdl`
+- return : string role dari user (default: 'user')
 
 ## References
 1. https://www.codejava.net/java-ee/web-services/how-to-code-and-deploy-java-xml-web-services-jax-ws-on-tomcat
